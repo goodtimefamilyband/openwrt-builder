@@ -81,10 +81,10 @@ jobs:
           curl -SL https://github.com/LorenzoBianconi/net-next/commit/93dfca902f0d79126612b8e3cc553b5d891c1f55.patch > target/linux/mediatek/patches-6.12/999-wed-dma-mask-limitation.patch
 
       # From https://github.com/LorenzoBianconi/wireless-next/commit/3e444c68513934d47b019b236ad083c386b0d85b
-      - name: Copy patches for WED kernel traceback
-        run: |
-          curl -SL https://raw.githubusercontent.com/danpawlik/openwrt-builder/master/patches/999-use-proper-wed-reference-in-wed-kernel.patch > target/linux/mediatek/patches-6.12/999-use-proper-wed-reference-in-wed-kernel.patch
-          curl -SL https://github.com/LorenzoBianconi/mt76/commit/92f22edf7fd119cde26218a7431919e4cdf1628e.patch > package/kernel/mt76/patches/999-use-proper-wed-reference-in-wed-mt76.patch
+      # - name: Copy patches for WED kernel traceback
+        # run: |
+          # curl -SL https://raw.githubusercontent.com/danpawlik/openwrt-builder/master/patches/999-use-proper-wed-reference-in-wed-kernel.patch > target/linux/mediatek/patches-6.12/999-use-proper-wed-reference-in-wed-kernel.patch
+          # curl -SL https://github.com/LorenzoBianconi/mt76/commit/92f22edf7fd119cde26218a7431919e4cdf1628e.patch > package/kernel/mt76/patches/999-use-proper-wed-reference-in-wed-mt76.patch
 
 
       #- name: Enable wolfssl
@@ -96,11 +96,11 @@ jobs:
       ### EEPROM FIX ###
       #
       ## https://github.com/openwrt/mt76/pull/954
-      #- name: Use patch from Yukariin
-      #  run: |
-      #    mkdir -p package/kernel/mt76/patches
-      #    curl -SL https://github.com/openwrt/mt76/commit/8088940ffd047a6d282a95af829562e8038f5b2d.patch > package/kernel/mt76/patches/001-Add-tx_power-check-Yukariin.patch
-      #
+      - name: Use patch from Yukariin
+        run: |
+         mkdir -p package/kernel/mt76/patches
+         curl -SL https://github.com/openwrt/mt76/commit/8088940ffd047a6d282a95af829562e8038f5b2d.patch > package/kernel/mt76/patches/001-Add-tx_power-check-Yukariin.patch
+      
       ## https://github.com/openwrt/mt76/pull/968
       #- name: Use patch from im-0
       #  run: |
