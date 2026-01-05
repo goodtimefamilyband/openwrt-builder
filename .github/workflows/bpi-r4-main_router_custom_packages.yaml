@@ -1,5 +1,5 @@
 ---
-name: BPI-R4 + main_router packages + GCC15
+name: BPI-R4 + main_router packages + GCC15 + Custom packages
 
 on:
   workflow_dispatch:
