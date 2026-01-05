@@ -1,5 +1,5 @@
 ---
-name: BPI-R4 + main_router packages + GCC15
+name: BPI-R4 + main_router packages + GCC15 + Custom packages
 
 on:
   workflow_dispatch:
@@ -113,6 +113,15 @@ jobs:
         run: |
           echo "CONFIG_PACKAGE_librespeed-go=y" >> .config
 
+      - name: Add USB Storage packages
+        run: |
+          echo "CONFIG_PACKAGE_block-mount=y" >> .config
+          echo "CONFIG_PACKAGE_e2fsprogs=y" >> .config
+          echo "CONFIG_PACKAGE_kmod-usb-storage=y" >> .config
+          echo "CONFIG_PACKAGE_kmod-usb3=y" >> .config
+          echo "CONFIG_PACKAGE_luci-app-hd-idle=y" >> .config
+          echo "CONFIG_PACKAGE_kmod-fs-ext4=y" >> .config
+
       - name: Run defconfig
         run: |
           make defconfig
@@ -158,8 +167,8 @@ jobs:
         uses: softprops/action-gh-release@master
         with:
           files: bin/targets/mediatek/filogic/*
-          tag_name: ${{ env.RELEASE_PREFIX }}-${{ env.REMOTE_BRANCH }}-${{ env.RELEASE_DATE }}
-          name: OpenWRT BPI-R4 + MLO + main_router packages + GCC15 + EEPROM Fix - ${{ env.REMOTE_BRANCH }} - ${{ env.RELEASE_DATE }}
+          tag_name: ${{ env.RELEASE_PREFIX }}-${{ env.REMOTE_BRANCH }}-${{ env.RELEASE_DATE }}-packages
+          name: OpenWRT BPI-R4 + MLO + main_router packages + GCC15 + EEPROM Fix - ${{ env.REMOTE_BRANCH }} - ${{ env.RELEASE_DATE }} - Custom Packages
           body: |
             Updated prebuilt images with main_router packages, patch for EEPROM low power issue  build with GCC14 - ${{ env.RELEASE_DATE }},
             Build Commit: ${{ needs.check_commits.outputs.latest_commit_sha }}
