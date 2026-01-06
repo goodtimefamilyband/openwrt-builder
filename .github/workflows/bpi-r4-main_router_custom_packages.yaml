@@ -122,6 +122,13 @@ jobs:
           echo "CONFIG_PACKAGE_luci-app-hd-idle=y" >> .config
           echo "CONFIG_PACKAGE_kmod-fs-ext4=y" >> .config
 
+      - name: Add Docker packages
+        run: |
+          echo "CONFIG_PACKAGE_dockerd=y" >> .config
+          echo "CONFIG_PACKAGE_docker=y" >> .config
+          echo "CONFIG_PACKAGE_docker-compose=y" >> .config
+          echo "CONFIG_PACKAGE_luci-app-dockerman=y" >> .config
+
       - name: Run defconfig
         run: |
           make defconfig
